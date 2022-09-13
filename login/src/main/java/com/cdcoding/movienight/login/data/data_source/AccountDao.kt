@@ -1,10 +1,10 @@
-package com.cdcoding.movienight.login.data
+package com.cdcoding.movienight.login.data.data_source
 
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.cdcoding.movienight.login.domain.Account
+import com.cdcoding.movienight.login.domain.model.Account
 import kotlinx.coroutines.flow.Flow
 
 interface AccountDao {
