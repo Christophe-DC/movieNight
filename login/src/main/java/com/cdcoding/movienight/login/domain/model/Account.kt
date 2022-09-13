@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey
 data class Account(
     val firstName: String,
     val lastName: String,
-    val pseudo: Long,
+    val pseudo: String,
     @PrimaryKey val id: Int? = null
 )
+
+class InvalidAccountException(message: String): Exception(message)
