@@ -2,4 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cdcoding.movienight.login">
 
+    <application>
+        <activity
+            android:name=".presentation.AccountSelectionActivity"
+            android:exported="false"
+            android:label="@string/title_activity_account_selection"
+            android:theme="@style/Theme.MovieNight" />
+    </application>
+
 </manifest>
