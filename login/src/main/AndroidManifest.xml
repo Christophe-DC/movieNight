@@ -5,9 +5,16 @@
     <application>
         <activity
             android:name=".presentation.AccountSelectionActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_account_selection"
-            android:theme="@style/Theme.MovieNight" />
+            android:theme="@style/Theme.MovieNight" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
