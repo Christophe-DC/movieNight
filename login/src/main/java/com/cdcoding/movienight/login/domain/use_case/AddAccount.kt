@@ -11,13 +11,13 @@ class AddAccount(
     @Throws(InvalidAccountException::class)
     suspend operator fun invoke(account: Account) {
         if(account.firstName.isBlank()) {
-            throw InvalidAccountException("The title of the account can't be empty")
+            throw InvalidAccountException("The first name of the account can't be empty")
         }
         if(account.lastName.isBlank()) {
-            throw InvalidAccountException("The content of the account can't be empty")
+            throw InvalidAccountException("The last name of the account can't be empty")
         }
         if(account.pseudo.isBlank()) {
-            throw InvalidAccountException("The content of the account can't be empty")
+            throw InvalidAccountException("The pseudo of the account can't be empty")
         }
         repository.insertAccount(account)
     }
