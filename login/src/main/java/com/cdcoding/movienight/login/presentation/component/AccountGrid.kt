@@ -1,6 +1,5 @@
 package com.cdcoding.movienight.login.presentation.component
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
