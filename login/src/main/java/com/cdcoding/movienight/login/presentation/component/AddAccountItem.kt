@@ -9,21 +9,27 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 
 @Composable
 fun AddAccountItem(
+    isEnabled: Boolean = true,
     onAddAccountClick: () -> Unit
 ) {
     Button(
         modifier = Modifier
             .width(80.dp)
             .height(80.dp)
+            .alpha(
+                if (!isEnabled) 0.4f
+                else 1f
+            )
             .clip(shape = CircleShape)
             .background(MaterialTheme.colors.onSurface),
-        onClick = onAddAccountClick
+        onClick = { if (isEnabled) onAddAccountClick() }
     )
     {
         Icon(
