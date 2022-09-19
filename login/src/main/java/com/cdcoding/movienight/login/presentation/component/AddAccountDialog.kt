@@ -35,7 +35,7 @@ fun AddAccountDialog(
     isNewAccountCreating: Boolean = false
 ) {
     Dialog(
-        onDismissRequest = { onDismissRequest }
+        onDismissRequest =  onDismissRequest
     ) {
         Card(
             modifier = Modifier
