@@ -5,7 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cdcoding.movienight.login.domain.model.Account
-import com.cdcoding.movienight.login.domain.model.InvalidAccountException
+import com.cdcoding.movienight.database.data.model.Account
+import com.cdcoding.movienight.database.data.model.InvalidAccountException
 import com.cdcoding.movienight.login.domain.use_case.AccountUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn

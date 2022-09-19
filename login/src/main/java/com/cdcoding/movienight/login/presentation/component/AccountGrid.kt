@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import com.cdcoding.movienight.login.domain.model.Account
+import com.cdcoding.movienight.database.data.model.Account
 import kotlinx.coroutines.launch
 
 
