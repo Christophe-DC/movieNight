@@ -1,32 +1,27 @@
 package com.cdcoding.movienight.login.presentation
 
-import android.util.Log
-import androidx.compose.animation.*
+import android.widget.Toast
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.cdcoding.movienight.common.util.Screen
 import com.cdcoding.movienight.login.R
-import com.cdcoding.movienight.login.presentation.component.*
+import com.cdcoding.movienight.login.presentation.component.AccountGrid
+import com.cdcoding.movienight.login.presentation.component.AddAccountDialog
+import com.cdcoding.movienight.login.presentation.component.AppTitle
+import com.cdcoding.movienight.login.presentation.component.BackgroundContainer
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -34,17 +29,31 @@ fun AccountsScreen(
     navController: NavController,
     viewModel: AccountsViewModel = hiltViewModel()
 ) {
+    val mContext = LocalContext.current
     val delayMillis = 1000
     val durationMillis = 1000
     val accounts = viewModel.state.value.accounts
     val firstNameState = viewModel.accountFirstName.value
     val lastNameState = viewModel.accountLastName.value
     val pseudoState = viewModel.accountPseudo.value
+    val accountLoading = viewModel.state.value.accountLoading
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is AccountsViewModel.UiEvent.ShowToast -> {
+                    Toast.makeText(mContext, event.message, Toast.LENGTH_LONG).show()
+                }
+                is AccountsViewModel.UiEvent.MoviesFetched -> {
+                }
+            }
+        }
+    }
 
     val alpha = remember {
         Animatable(0f)
     }
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(alpha) {
         alpha.animateTo(
             targetValue = 1f,
             animationSpec = tween(
@@ -87,12 +96,16 @@ fun AccountsScreen(
             delayMillis = delayMillis,
             durationMillis = durationMillis,
             accounts = accounts,
-            onAddAccountClick = { viewModel.onEvent(AccountsEvent.OpenNewAccountModal) }
+            accountLoading = accountLoading,
+            onAddAccountClick = { viewModel.onEvent(AccountsEvent.OpenNewAccountModal) },
+            onAccountItemClick = { account ->
+                viewModel.onEvent(AccountsEvent.OpenAccount(account))
+            }
         )
     }
     if (viewModel.state.value.isNewAccountModalVisible) {
         AddAccountDialog(
-            onDismissRequest = { viewModel.onEvent(AccountsEvent.CloseNewAccountModal)},
+            onDismissRequest = { viewModel.onEvent(AccountsEvent.CloseNewAccountModal) },
             firstNameState = firstNameState,
             onFirstNameChange = { viewModel.onEvent(AccountsEvent.EnteredFirstName(it)) },
             onFirstNameFocusChange = { viewModel.onEvent(AccountsEvent.ChangeFirstNameFocus(it)) },
