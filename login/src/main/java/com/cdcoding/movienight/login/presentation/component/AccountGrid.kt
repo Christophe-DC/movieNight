@@ -21,7 +21,9 @@ fun AccountGrid(
     delayMillis: Int = 1000,
     durationMillis: Int = 1000,
     accounts: List<Account>,
-    onAddAccountClick: () -> Unit
+    accountLoading: Account? = null,
+    onAddAccountClick: () -> Unit,
+    onAccountItemClick: (account: Account) -> Unit,
 ) {
     Box(
         modifier = modifier,
@@ -72,7 +74,12 @@ fun AccountGrid(
                     contentAlignment = alignment,
                     propagateMinConstraints = false
                 ) {
-                    AccountItem(account)
+                    AccountItem(
+                        account = account,
+                        isLoading = account.id == accountLoading?.id,
+                        isEnabled = accountLoading == null,
+                        onAccountItemClick = onAccountItemClick
+                    )
                 }
             }
             item(span = { GridItemSpan(lastItemSpan) }) {
@@ -86,7 +93,10 @@ fun AccountGrid(
                     contentAlignment = alignment,
                     propagateMinConstraints = false
                 ) {
-                    AddAccountItem(onAddAccountClick)
+                    AddAccountItem(
+                        isEnabled = accountLoading == null,
+                        onAddAccountClick = onAddAccountClick
+                    )
                 }
             }
         }
