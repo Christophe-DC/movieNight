@@ -1,11 +1,11 @@
-package com.cdcoding.movienight.login.data.repository
+package com.cdcoding.movienight.database.data.repository
 
-import com.cdcoding.movienight.login.data.data_source.AccountDao
-import com.cdcoding.movienight.login.domain.model.Account
-import com.cdcoding.movienight.login.domain.repository.AccountRepository
+import com.cdcoding.movienight.database.data.AccountDao
+import com.cdcoding.movienight.database.data.model.Account
+import com.cdcoding.movienight.database.domain.repository.AccountRepository
 import kotlinx.coroutines.flow.Flow
 
-class AccountRepositoryImpl(
+internal class AccountRepositoryImpl(
     private val dao: AccountDao
 ) : AccountRepository {
     override fun getAccounts(): Flow<List<Account>> {

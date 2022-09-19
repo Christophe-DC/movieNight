@@ -1,4 +1,4 @@
-package com.cdcoding.movienight.login.domain.model
+package com.cdcoding.movienight.database.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

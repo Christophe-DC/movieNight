@@ -1,11 +1,11 @@
-package com.cdcoding.movienight.login.data.data_source
+package com.cdcoding.movienight.database.data
 
 import androidx.room.*
-import com.cdcoding.movienight.login.domain.model.Account
+import com.cdcoding.movienight.database.data.model.Account
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface AccountDao {
+internal interface AccountDao {
     @Query("SELECT * FROM account")
     fun getAccounts(): Flow<List<Account>>
 

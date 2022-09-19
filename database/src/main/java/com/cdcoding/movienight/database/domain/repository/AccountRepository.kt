@@ -1,6 +1,6 @@
-package com.cdcoding.movienight.login.domain.repository
+package com.cdcoding.movienight.database.domain.repository
 
-import com.cdcoding.movienight.login.domain.model.Account
+import com.cdcoding.movienight.database.data.model.Account
 import kotlinx.coroutines.flow.Flow
 
 interface AccountRepository {
