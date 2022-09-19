@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "Movie Night"
 include ':app'
 include ':login'
+include ':api'
+include ':common'
+include ':database'
