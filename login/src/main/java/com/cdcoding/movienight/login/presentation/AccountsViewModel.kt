@@ -178,6 +178,7 @@ class AccountsViewModel @Inject constructor(
                             accountLoading = null
                         )
                     }
+                    else -> {}
                 }
             }
         }
