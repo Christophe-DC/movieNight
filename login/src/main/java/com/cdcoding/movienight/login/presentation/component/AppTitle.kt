@@ -61,7 +61,7 @@ fun AppTitle(
                     .width(80.dp)
                     .scale(scale.value),
                 contentScale = ContentScale.FillWidth,
-                painter = painterResource(id = R.drawable.movienight_tittle),
+                painter = painterResource(id = R.drawable.movienight_title),
                 contentDescription = null,
             )
         }
