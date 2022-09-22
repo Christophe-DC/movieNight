@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.room.Room
 import com.cdcoding.movienight.database.data.MovieNightDatabase
 import com.cdcoding.movienight.database.data.repository.AccountRepositoryImpl
+import com.cdcoding.movienight.database.data.repository.MovieDetailRepositoryImpl
 import com.cdcoding.movienight.database.data.repository.MovieRepositoryImpl
 import com.cdcoding.movienight.database.domain.repository.AccountRepository
+import com.cdcoding.movienight.database.domain.repository.MovieDetailRepository
 import com.cdcoding.movienight.database.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
@@ -38,6 +40,12 @@ internal class DatabaseModule {
     @Singleton
     fun provideMovieRepository(db: MovieNightDatabase): MovieRepository {
         return MovieRepositoryImpl(db.movieDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailRepository(db: MovieNightDatabase): MovieDetailRepository {
+        return MovieDetailRepositoryImpl(db.movieDetailDao)
     }
 
 }
