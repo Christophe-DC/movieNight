@@ -23,7 +23,6 @@ import com.cdcoding.movienight.login.presentation.component.AppTitle
 import com.cdcoding.movienight.login.presentation.component.BackgroundContainer
 import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AccountsScreen(
     navController: NavController,
@@ -72,7 +71,8 @@ fun AccountsScreen(
         )
         AppTitle(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .systemBarsPadding(),
             delayMillis = delayMillis,
             durationMillis = durationMillis
         )
