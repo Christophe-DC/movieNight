@@ -71,4 +71,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
     kapt("androidx.room:room-compiler:2.4.3")
 
+    implementation("com.google.code.gson:gson:2.9.1")
+
 }
