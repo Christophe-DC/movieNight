@@ -1,6 +1,5 @@
 package com.cdcoding.movienight.api.data.model.dto
 
-import com.cdcoding.movienight.database.data.model.Movie
 import com.cdcoding.movienight.database.data.model.Movies
 import com.google.gson.annotations.SerializedName
 
