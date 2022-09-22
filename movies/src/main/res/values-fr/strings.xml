@@ -1,0 +1,5 @@
+<resources>
+    <string name="most_popular">Les plus populaires</string>
+    <string name="upcoming_movies">Les films à venir</string>
+    <string name="top_rated">Les mieux notés</string>
+</resources>
