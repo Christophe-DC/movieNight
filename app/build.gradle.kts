@@ -40,6 +40,7 @@ dependencies {
     val hiltVersion: String by rootProject.extra
 
     //Compose
+    implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:1.5.1")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui:$composeVersion")
@@ -49,6 +50,7 @@ dependencies {
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.24.7-alpha")
+    implementation("com.google.accompanist:accompanist-coil:0.12.0")
 
     // Dagger
     implementation("com.google.dagger:hilt-android:$daggerVersion")
@@ -60,5 +62,6 @@ dependencies {
     implementation("androidx.hilt:hilt-work:$hiltVersion")
 
     implementation(project(":login"))
+    implementation(project(":movies"))
     implementation(project(":common"))
 }
