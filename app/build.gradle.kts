@@ -61,6 +61,11 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:$hiltVersion")
     implementation("androidx.hilt:hilt-work:$hiltVersion")
 
+    // Test
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+
     implementation(project(":login"))
     implementation(project(":movies"))
     implementation(project(":common"))
