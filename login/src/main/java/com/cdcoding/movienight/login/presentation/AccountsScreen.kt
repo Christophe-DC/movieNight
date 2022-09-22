@@ -44,6 +44,10 @@ fun AccountsScreen(
                     Toast.makeText(mContext, event.message, Toast.LENGTH_LONG).show()
                 }
                 is AccountsViewModel.UiEvent.MoviesFetched -> {
+                    navController.navigate(
+                        Screen.MoviesScreen.route +
+                                "?accountId=${event.accountId}"
+                    )
                 }
             }
         }
