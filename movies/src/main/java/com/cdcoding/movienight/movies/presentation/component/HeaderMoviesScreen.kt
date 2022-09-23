@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -20,23 +21,26 @@ import com.cdcoding.movienight.database.data.model.Account
 
 
 @Composable
-fun BannerMovies(
+fun HeaderMoviesScreen(
     modifier: Modifier = Modifier,
     account: Account?,
     delayMillis: Int = 1000,
     durationMillis: Int = 1000
 ) {
-    val horizontalBias = remember { Animatable(0f) }
-    val alignment by derivedStateOf { BiasAlignment.Horizontal(horizontalBias.value) }
-    LaunchedEffect(key1 = 1) {
-        horizontalBias.animateTo(
-            targetValue = -1f,
-            animationSpec = tween(
-                durationMillis = durationMillis,
-                delayMillis = delayMillis
+    var horizontalBias by rememberSaveable { mutableStateOf(0f) }
+    val horizontalAnimate = remember { Animatable(horizontalBias) }
+    val alignment by derivedStateOf { BiasAlignment.Horizontal(horizontalAnimate.value) }
+    LaunchedEffect(true) {
+        if (horizontalBias > -1f) {
+            horizontalAnimate.animateTo(
+                targetValue = -1f,
+                animationSpec = tween(
+                    durationMillis = durationMillis,
+                    delayMillis = delayMillis
+                )
             )
-        )
-
+            horizontalBias = -1f
+        }
     }
     Box(modifier = modifier)
     {
