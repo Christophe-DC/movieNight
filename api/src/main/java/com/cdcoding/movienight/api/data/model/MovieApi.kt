@@ -19,7 +19,7 @@ internal interface MovieApi {
     @GET("movie/{movie_id}?api_key=${BuildConfig.API_KEY}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,
-        @Query("language") language: String = "${Locale.current.language}-${Locale.current.region}",
-        @Query("append_to_response") responseType: String = "videos"
+        //@Query("language") language: String = "${Locale.current.language}-${Locale.current.region}",
+        @Query("append_to_response") responseType: String = "videos,images"
     ): MovieDetailDto
 }
