@@ -68,5 +68,6 @@ dependencies {
 
     implementation(project(":login"))
     implementation(project(":movies"))
+    implementation(project(":movieDetail"))
     implementation(project(":common"))
 }

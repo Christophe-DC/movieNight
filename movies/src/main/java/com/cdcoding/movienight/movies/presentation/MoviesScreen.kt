@@ -1,15 +1,10 @@
 package com.cdcoding.movienight.movies.presentation
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,11 +39,10 @@ fun MoviesScreen(
                     Toast.makeText(mContext, event.message, Toast.LENGTH_LONG).show()
                 }
                 is MoviesViewModel.UiEvent.MovieDetailFetched -> {
-                    /*
                     navController.navigate(
                         Screen.MovieDetailScreen.route +
                                 "?movieDetailId=${event.movieDetailId}"
-                    )*/
+                    )
                 }
             }
         }
