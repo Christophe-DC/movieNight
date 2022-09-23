@@ -33,7 +33,8 @@ internal data class MovieDetailDto(
     @SerializedName("vote_average")
     val voteAverage: Double?,
     @SerializedName("vote_count")
-    val voteCount: Int?
+    val voteCount: Int?,
+    val images: BackdropsDto?,
 )
 
 internal fun MovieDetailDto.toMovieDetail(): MovieDetail {
@@ -42,7 +43,7 @@ internal fun MovieDetailDto.toMovieDetail(): MovieDetail {
         backdropPath = backdropPath,
         id = id,
         budget = budget,
-        genres = genres?.map { it.name },
+        genres = genres?.map { it.name } ?: emptyList(),
         homepage = homepage,
         imdbId = imdbId,
         originalLanguage = originalLanguage,
@@ -59,6 +60,7 @@ internal fun MovieDetailDto.toMovieDetail(): MovieDetail {
         video = video,
         videoUrl = videos?.results?.firstOrNull()?.key,
         voteAverage = voteAverage,
-        voteCount = voteCount
+        voteCount = voteCount,
+        backdropsPath = images?.backdrops?.map { it.file_path } ?: emptyList()
     )
 }
