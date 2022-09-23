@@ -1,0 +1,9 @@
+<resources>
+    <string name="first_visit">First visit?</string>
+    <string name="welcome_message">Shall we do a painting tonight?</string>
+    <string name="add_account_dialog_title">Create an account</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="valid">Valid</string>
+</resources>
