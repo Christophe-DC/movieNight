@@ -17,7 +17,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cdcoding.movienight.common.util.Screen
 import com.cdcoding.movienight.movies.presentation.component.BannerMovies
-import com.cdcoding.movienight.movies.presentation.component.MovieItem
+import com.cdcoding.movienight.movies.presentation.component.HeaderMoviesScreen
+import com.cdcoding.movienight.movies.presentation.component.MovieList
 import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.*
@@ -61,13 +62,13 @@ fun MoviesScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .systemBarsPadding()
-                    .padding(start = 20.dp)
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(start = 20.dp)
                 ) {
-                    BannerMovies(
+                    HeaderMoviesScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(
@@ -80,50 +81,34 @@ fun MoviesScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp)
+                        .padding(
+                            top = 24.dp,
+                            start = 20.dp
+                        )
                 ) {
                     BannerMovies(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 24.dp
-                            ),
+                            .fillMaxWidth(),
                         movies = state.movies
                     )
                 }
                 val moviePopular = state.movies.sortedByDescending { movie ->
                     movie.popularity
                 }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 24.dp)
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.most_popular),
-                        style = MaterialTheme.typography.body1
-                    )
-                }
                 Row(modifier = Modifier.fillMaxWidth())
                 {
-                    LazyRow(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentPadding = PaddingValues(top = 10.dp),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(moviePopular) { movie ->
-                            MovieItem(
-                                modifier = Modifier.clickable {
-                                    viewModel.onEvent(
-                                        MoviesEvent.OpenMovieDetail(
-                                            movie.id
-                                        )
-                                    )
-                                },
-                                movie = movie
+                    MovieList(
+                        movies = moviePopular,
+                        label = stringResource(id = R.string.most_popular),
+                        contentPaddingHorizontal = 20.dp,
+                        onMovieItemClick = { movieId ->
+                            viewModel.onEvent(
+                                MoviesEvent.OpenMovieDetail(
+                                    movieId
+                                )
                             )
                         }
-                    }
+                    )
                 }
                 val movieUpcoming = state.movies.filter { movie ->
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -136,25 +121,18 @@ fun MoviesScreen(
                         .fillMaxWidth()
                         .padding(top = 24.dp)
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.upcoming_movies),
-                        style = MaterialTheme.typography.body1
-                    )
-                }
-                Row(modifier = Modifier.fillMaxWidth())
-                {
-                    LazyRow(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        contentPadding = PaddingValues(top = 10.dp),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(movieUpcoming) { movie ->
-                            MovieItem(
-                                movie = movie
+                    MovieList(
+                        movies = movieUpcoming,
+                        label = stringResource(id = R.string.upcoming_movies),
+                        contentPaddingHorizontal = 20.dp,
+                        onMovieItemClick = { movieId ->
+                            viewModel.onEvent(
+                                MoviesEvent.OpenMovieDetail(
+                                    movieId
+                                )
                             )
                         }
-                    }
+                    )
                 }
                 val movieTopRate = state.movies.sortedByDescending { movie ->
                     movie.voteAverage
@@ -162,30 +140,23 @@ fun MoviesScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 24.dp)
+                        .padding(
+                            top = 24.dp,
+                            bottom = 24.dp
+                        )
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.top_rated),
-                        style = MaterialTheme.typography.body1
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .padding(bottom = 24.dp)
-                        .fillMaxWidth()
-                ) {
-                    LazyRow(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        contentPadding = PaddingValues(top = 10.dp),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(movieTopRate) { movie ->
-                            MovieItem(
-                                movie = movie
+                    MovieList(
+                        movies = movieTopRate,
+                        label = stringResource(id = R.string.top_rated),
+                        contentPaddingHorizontal = 20.dp,
+                        onMovieItemClick = { movieId ->
+                            viewModel.onEvent(
+                                MoviesEvent.OpenMovieDetail(
+                                    movieId
+                                )
                             )
                         }
-                    }
+                    )
                 }
             }
         }
