@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -53,17 +54,24 @@ fun AccountsScreen(
         }
     }
 
+    var runAnimation by rememberSaveable { mutableStateOf(true) }
     val alpha = remember {
-        Animatable(0f)
-    }
-    LaunchedEffect(alpha) {
-        alpha.animateTo(
-            targetValue = 1f,
-            animationSpec = tween(
-                durationMillis = durationMillis,
-                delayMillis = delayMillis
-            )
+        Animatable(
+            if (runAnimation) 0f
+            else 1f
         )
+    }
+    LaunchedEffect(runAnimation) {
+        if (runAnimation) {
+            alpha.animateTo(
+                targetValue = 1f,
+                animationSpec = tween(
+                    durationMillis = durationMillis,
+                    delayMillis = delayMillis
+                )
+            )
+            runAnimation = false
+        }
     }
     Box(
         modifier = Modifier
