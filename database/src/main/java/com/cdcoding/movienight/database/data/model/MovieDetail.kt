@@ -28,7 +28,8 @@ data class MovieDetail(
     val video: Boolean?,
     val videoUrl: String?,
     val voteAverage: Double?,
-    val voteCount: Int?
+    val voteCount: Int?,
+    val backdropsPath: List<String>?
 )
 
 class ListConverter {
