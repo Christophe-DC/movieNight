@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,18 +28,26 @@ fun BackgroundContainer(
 ) {
     val scrollState = rememberScrollState()
     val configuration = LocalConfiguration.current
-    var backgroundImageHeight by remember { mutableStateOf(0) }
+
+    var runAnimation by rememberSaveable { mutableStateOf(true) }
+    var backgroundImageHeight by rememberSaveable { mutableStateOf(0) }
     val offsetY = remember {
-        Animatable(0f)
-    }
-    LaunchedEffect(key1 = true) {
-        offsetY.animateTo(
-            targetValue = configuration.screenHeightDp.dp.value - backgroundImageHeight.toFloat(),
-            animationSpec = tween(
-                durationMillis = durationMillis,
-                delayMillis = delayMillis
-            )
+        Animatable(
+            if (runAnimation) 0f
+            else configuration.screenHeightDp.dp.value - backgroundImageHeight.toFloat()
         )
+    }
+    LaunchedEffect(runAnimation) {
+        if (runAnimation) {
+            offsetY.animateTo(
+                targetValue = configuration.screenHeightDp.dp.value - backgroundImageHeight.toFloat(),
+                animationSpec = tween(
+                    durationMillis = durationMillis,
+                    delayMillis = delayMillis
+                )
+            )
+            runAnimation = false
+        }
     }
     Box(
         modifier = Modifier
