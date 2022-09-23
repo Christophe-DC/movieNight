@@ -75,6 +75,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 
+    // Worker
     implementation("androidx.work:work-runtime-ktx:$workVersion")
 
     // Test
