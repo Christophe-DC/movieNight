@@ -40,7 +40,8 @@ val Typography = Typography(
     body2 = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Normal,
-        fontSize = 13.sp
+        fontSize = 13.sp,
+        lineHeight = 20.sp
     ),
     button = TextStyle(
         fontFamily = fonts,
