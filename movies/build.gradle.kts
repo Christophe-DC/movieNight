@@ -54,6 +54,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.24.7-alpha")
     implementation("com.google.accompanist:accompanist-coil:0.12.0")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.16.1")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
     // Dagger
     implementation("com.google.dagger:hilt-android:$daggerVersion")
