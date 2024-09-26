@@ -15,14 +15,19 @@ import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 
 @Composable
 fun VideoPlayer(
     modifier: Modifier = Modifier,
-    sourceUrl: String
+    videoId: String
 ) {
     val context = LocalContext.current
 
@@ -32,25 +37,39 @@ fun VideoPlayer(
             playWhenReady = true
             prepare()
             play()
+
         }
     }
 
     var isPlaying by remember { mutableStateOf(true) }
 
-    object : YouTubeExtractor(context) {
+    /*object : YouTubeExtractor(context) {
         override fun onExtractionComplete(ytFiles: SparseArray<YtFile>?, vMeta: VideoMeta?) {
             if (ytFiles != null) {
                 val itag = 22
+                println("ytFiles: $ytFiles")
                 val downloadUrl: String = ytFiles[itag].getUrl()
                 exoPlayer.setMediaItem(MediaItem.fromUri(downloadUrl))
             }
         }
-    }.extract(sourceUrl)
+    }.extract(sourceUrl, true, true)*/
 
     Box(modifier = modifier)
     {
         DisposableEffect(
             AndroidView(
+                modifier = modifier,
+                factory = {
+                    val playerView = YouTubePlayerView(context)
+                    playerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                        override fun onReady(youTubePlayer: YouTubePlayer) {
+                            youTubePlayer.loadVideo(videoId, 0f)
+                        }
+                    })
+                    playerView
+                }
+            )
+            /*AndroidView(
                 modifier = Modifier.clickable  {
                     if (exoPlayer.isPlaying) {
                         exoPlayer.pause()
@@ -72,7 +91,7 @@ fun VideoPlayer(
                         )
                     }
                 }
-            )
+            )*/
         ) {
             onDispose {
                 exoPlayer.pause()

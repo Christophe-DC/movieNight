@@ -1,14 +1,14 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21

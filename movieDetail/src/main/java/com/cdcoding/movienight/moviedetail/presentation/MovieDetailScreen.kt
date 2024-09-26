@@ -74,7 +74,7 @@ fun MovieDetailScreen(
                             if (state.movieDetail?.videoUrl != null) {
                                 val url =
                                     "https://www.youtube.com/watch?v=${state.movieDetail.videoUrl}"
-                                VideoPlayer(sourceUrl = url)
+                                VideoPlayer(videoId = state.movieDetail.videoUrl ?: "")
                             }
                         }
                         Row(

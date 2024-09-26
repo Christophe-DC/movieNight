@@ -6,26 +6,61 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.cdcoding.movienight"
         minSdk = 21
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        multiDexEnabled = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
+
+
+    signingConfigs {
+        create("appstore") {
+            storeFile = file("../appstore.jks")
+            storePassword = "password"
+            keyAlias = "key0"
+            keyPassword = "password"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("appstore")
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
+        release {
+            signingConfig = signingConfigs.getByName("appstore")
+            isDebuggable = false
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    lintOptions {
+        baseline(file("lint-baseline.xml"))
+    }
+
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
     packagingOptions {
         resources {
@@ -70,4 +105,7 @@ dependencies {
     implementation(project(":movies"))
     implementation(project(":movieDetail"))
     implementation(project(":common"))
+
+
+    implementation("com.android.support:multidex:2.0.1")
 }

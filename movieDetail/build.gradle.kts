@@ -7,7 +7,7 @@ plugins {
 
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
@@ -16,17 +16,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
     packagingOptions {
         resources {
@@ -75,7 +75,8 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer:2.18.1")
 
     // Youtube extractor
-    implementation("com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT")
+    implementation("com.github.HaarigerHarald:android-youtubeExtractor:v2.1.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1")
 
     // Test
     testImplementation("junit:junit:4.13.2")
