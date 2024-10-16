@@ -9,11 +9,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.cdcoding.movienight"
+        applicationId = "com.cdcoding.movienightapp"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         multiDexEnabled = true
     }

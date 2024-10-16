@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit
 @Composable
 fun MovieDetailScreen(
     navController: NavController,
-    viewModel: MovieDetailViewModel = hiltViewModel()
+    viewModel: MovieDetailViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
@@ -136,23 +136,26 @@ fun MovieDetailScreen(
                                     start = 22.dp,
                                     top = 36.dp,
                                     end = 22.dp
-                                )
+                                ),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column {
                                 Button(
-                                    modifier = Modifier.height(40.dp),
                                     onClick = {}
                                 ) {
-                                    Column {
+                                    Row(
+                                        modifier = Modifier.padding(2.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
                                         Icon(
                                             modifier = Modifier
                                                 .width(20.dp)
-                                                .height(20.dp),
+                                                .height(20.dp)
+                                                .padding(end = 4.dp),
                                             imageVector = Icons.Default.PlayArrow,
                                             contentDescription = null
                                         )
-                                    }
-                                    Column {
                                         Text(
                                             text = stringResource(id = R.string.watch),
                                             style = MaterialTheme.typography.button
@@ -169,8 +172,8 @@ fun MovieDetailScreen(
                                         ),
                                         shape = shapes.small
                                     )
-                                    .width(40.dp)
-                                    .height(40.dp),
+                                    .widthIn(min = 40.dp)
+                                    .heightIn(min = 40.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
